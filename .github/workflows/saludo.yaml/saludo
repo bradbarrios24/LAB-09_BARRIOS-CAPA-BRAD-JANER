@@ -1,18 +1,20 @@
-name: Nombre del Workflow
+name: Saludo
 
 on:
   push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+    branches:
+      - main
+      - develop
 
 jobs:
-  nombre-del-job:
+  saludo:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Paso 1
-        uses: actions/checkout@v4
+      - name: Saludo desde main
+        if: github.ref == 'refs/heads/main'
+        run: echo "Hola desde main, soy Brad Barrios"
 
-      - name: Paso 2
-        run: echo "Hola desde el runner"
+      - name: Saludo desde develop
+        if: github.ref == 'refs/heads/develop'
+        run: echo "Hola desde develop, soy Brad Barrios"
